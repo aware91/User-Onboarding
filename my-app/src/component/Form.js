@@ -1,4 +1,4 @@
-import React, { useState, USeEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
 
@@ -47,21 +47,21 @@ export default function Form() {
     const formSubmit = e => {
         e.preventDefault();
         axios
-        .post('', formstate)
-        .then(response => {
+            .post("h", formState)
+            .then(response => {
             setPost(response.data);
             setFormState({
-                name: '',
-                email: '',
-                password: '',
-                terms: '',
-            })
+                name: "",
+                email: "",
+                password: "",
+                terms: ""
+            });
             setServerError(null);
-        })
-        .catch(err => {
-            setServerError('Your information you have entered in not correct')
-        })
-    }
+            })
+            .catch(err => {
+            setServerError("oops! something happened!");
+        });
+    };
 
     const inputChange = e => {
         e.persist();
@@ -71,7 +71,7 @@ export default function Form() {
     }
 
     return (
-        <form onSubmit={formSubit}>
+        <form onSubmit={formSubmit}>
             {serverError ? <p className='error'>{serverError}</p> : null}
             <label htmlFor='name'>
                 Name 
@@ -112,6 +112,7 @@ export default function Form() {
                     checked={formState.terms}
                     onChange={inputChange}
                 />
+                Terms & Conditions
             </label>
             <br></br>
             <button disabled={isButtonDisabled} type='submit'>Submit</button>

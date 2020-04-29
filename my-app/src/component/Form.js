@@ -47,9 +47,10 @@ export default function Form() {
     const formSubmit = e => {
         e.preventDefault();
         axios
-            .post("h", formState)
-            .then(response => {
-            setPost(response.data);
+            .post("https://reqres.in/api/users", formState)
+            .then(res => {
+            setPost(res.data);
+            console.log('success', post)
             setFormState({
                 name: "",
                 email: "",
@@ -65,16 +66,16 @@ export default function Form() {
 
     const inputChange = e => {
         e.persist();
-        const newFormData = { ...formState, [e.target.name]: e.target.type == 'checkbox' ? e.target.checked : e.target.value }
+        const newFormData = { ...formState, [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value }
         validateChange(e);
         setFormState(newFormData);
     }
 
     return (
-        <form onSubmit={formSubmit}>
+        <form onSubmit={formSubmit} className='formCSS'>
             {serverError ? <p className='error'>{serverError}</p> : null}
-            <label htmlFor='name'>
-                Name 
+            <label htmlFor='name' className='infoCSS'>
+                Name
                 <input
                     type='text'
                     name='name'
@@ -83,7 +84,7 @@ export default function Form() {
                 />            
                 {errors.name.length > 0 ? <p className='error'>{errors.name}</p> : null }
             </label>
-            <label htmlFor='email'>
+            <label htmlFor='email' className='infoCSS'>
                 Email Address 
                 <input
                     id='email'
@@ -94,7 +95,7 @@ export default function Form() {
                 />            
                 {errors.email.length > 0 ? <p className='error'>{errors.email}</p> : null }
             </label>
-            <label htmlFor='password'>
+            <label htmlFor='password' className='infoCSS'>
                 Password 
                 <input
                     type='password'
@@ -113,8 +114,7 @@ export default function Form() {
                     onChange={inputChange}
                 />
                 Terms & Conditions
-            </label>
-            <br></br>
+            </label><br></br>
             <button disabled={isButtonDisabled} type='submit'>Submit</button>
         </form>
     )

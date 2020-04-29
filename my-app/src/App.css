@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.formCSS {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 25vw;
+}
+
+.infoCSS {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin: 5% auto;
+}

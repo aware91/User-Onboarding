@@ -116,6 +116,7 @@ export default function Form() {
                 Terms & Conditions
             </label><br></br>
             <button disabled={isButtonDisabled} type='submit'>Submit</button>
+            <br></br><pre>{JSON.stringify(post, null, 2)}</pre>
         </form>
     )
 }
